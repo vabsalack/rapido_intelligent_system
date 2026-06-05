@@ -14,9 +14,15 @@ PYTHON_INTERPRETER = python
 ## Install Python dependencies
 .PHONY: requirements
 requirements:
-	uv sync
+	uv sync --all-groups
 	
-
+## Install base ml deps
+.PHONY: base_deps
+base_deps:
+	uv add numpy pandas matplotlib plotly scikit-learn
+	uv add --group dev ruff ty commitizen
+	uv add --group workspace marimo
+	uv sync --all-groups
 
 
 ## Delete all compiled Python files

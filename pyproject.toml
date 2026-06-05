@@ -17,10 +17,14 @@ classifiers = [
 ]
 dependencies = [
     "loguru",
+    "matplotlib>=3.10.9",
     "mkdocs",
+    "numpy>=2.4.6",
+    "pandas>=3.0.3",
     "pip",
+    "plotly>=6.8.0",
     "python-dotenv",
-    "ruff",
+    "scikit-learn>=1.9.0",
     "tqdm",
     "typer",
 ]
@@ -38,4 +42,22 @@ extend-select = ["I"]  # Add import sorting
 [tool.ruff.lint.isort]
 known-first-party = ["rapido_intelligent_system"]
 force-sort-within-sections = true
+
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "$version"
+version_scheme = "pep440"
+version_provider = "uv"
+update_changelog_on_bump = true
+major_version_zero = true
+[dependency-groups]
+dev = [
+    "commitizen>=4.16.3",
+    "ruff>=0.15.16",
+    "ty>=0.0.44",
+]
+workspace = [
+    "marimo>=0.23.9",
+]
 
