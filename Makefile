@@ -15,6 +15,36 @@ PYTHON_INTERPRETER = python
 .PHONY: requirements
 requirements:
 	uv sync --all-groups
+
+## Install dev tools
+.PHONY: dev_tools
+dev_tools:
+	uv add --group dev ruff ty commitizen
+	uv sync --all-groups
+
+## Install support notebook backend library
+.PHONY: nb_deps
+nb_deps:
+	uv add --group notebook marimo
+	uv sync --all-groups
+
+## Install libraries for exploratory data analysis
+.PHONY: eda_deps
+eda_deps:
+	uv add --group eda numpy pandas matplotlib plotly scipy
+	uv sync --all-groups
+
+## Install libraries for classical machine learning
+.PHONY: ml_classic_deps
+ml_classic_deps:
+	uv add --group ml_classic scikit-learn xgboost lightgbm catboost
+	uv sync --all-groups
+
+## Install libraries for deep learning
+.PHONY: ml_dl_deps
+ml_dl_deps:
+	uv add --group ml_dl torch torchvision
+	uv sync --all-groups
 	
 ## Install base ml deps
 .PHONY: base_deps
