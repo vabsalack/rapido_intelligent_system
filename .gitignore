@@ -1,6 +1,9 @@
 # Data
 # /data/
 
+# rough files
+rapido_intelligent_system/rough.py
+
 # vscode
 .vscode/
 
