@@ -26,11 +26,11 @@ EDA:
 
 .PHONY: ClassicMachineLearning
 ClassicMachineLearning:
-	uv add --group scikit-learn xgboost lightgbm catboost
+	uv add --group dev scikit-learn xgboost lightgbm catboost
 	
 .PHONY: DeepLearning
 DeepLearning:
-	uv add --group torch torchvision
+	uv add --group dev torch torchvision
 	
 ## Delete all compiled Python files
 .PHONY: clean
