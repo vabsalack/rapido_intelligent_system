@@ -18,6 +18,10 @@ INTERIM_DATA_DIR = DATA_DIR / "interim"
 PROCESSED_DATA_DIR = DATA_DIR / "processed"
 EXTERNAL_DATA_DIR = DATA_DIR / "external"
 
+# dataset links
+GDRIVE_LINK = "https://drive.google.com/drive/u/0/folders/1c4fPpkaZNIx73CxXMcjRX81Z4G4WUiOn"
+
+
 # model directory
 MODELS_DIR = PROJ_ROOT / "models"
 
