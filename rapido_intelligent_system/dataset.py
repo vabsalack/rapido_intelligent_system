@@ -2,76 +2,79 @@ from pathlib import Path
 
 import gdown
 
-# from loguru import logger
-# from tqdm import tqdm
-# import typer
+from loguru import logger
+from tqdm import tqdm
+import typer
 
-# from rapido_intelligent_system.config import PROCESSED_DATA_DIR, RAW_DATA_DIR
-from rapido_intelligent_system.config import RAW_DATA_DIR, GDRIVE_LINK
-
-
-# app = typer.Typer()
+from rapido_intelligent_system.config import (PROCESSED_DATA_DIR, 
+                                              RAW_DATA_DIR, 
+                                              GDRIVE_LINK)
 
 
-# @app.command()
-# def main(
-#     # ---- REPLACE DEFAULT PATHS AS APPROPRIATE ----
-#     input_path: Path = RAW_DATA_DIR / "dataset.csv",
-#     output_path: Path = PROCESSED_DATA_DIR / "dataset.csv",
-#     # ----------------------------------------------
-# ):
-#     # ---- REPLACE THIS WITH YOUR OWN CODE ----
-#     logger.info("Processing dataset...")
-#     for i in tqdm(range(10), total=10):
-#         if i == 5:
-#             logger.info("Something happened for iteration 5.")
-#     logger.success("Processing dataset complete.")
-#     # -----------------------------------------
+import pandas as pd
+import seaborn as sns
 
 
+from rich import print
 
-def download_gdrive_folder(folder_url: str, output_dir=None) -> Path:
+app = typer.Typer()
+
+
+@app.command()
+def main(
+    # ---- REPLACE DEFAULT PATHS AS APPROPRIATE ----
+    input_path: Path = RAW_DATA_DIR / "dataset.csv",
+    output_path: Path = PROCESSED_DATA_DIR / "dataset.csv",
+    # ----------------------------------------------
+):
+    # ---- REPLACE THIS WITH YOUR OWN CODE ----
+    logger.info("Processing dataset...")
+    for i in tqdm(range(10), total=10):
+        if i == 5:
+            logger.info("Something happened for iteration 5.")
+    logger.success("Processing dataset complete.")
+    # -----------------------------------------
+
+
+@app.command("download")
+def download_gdrive_folder(drive_web_url: str = GDRIVE_LINK, 
+                           output_dir: str = RAW_DATA_DIR) -> Path:
     """
-    Downloads all files from a public Google Drive folder link into output_dir.
+    Downloads datasets from author's, keerhtivasan, Google drive to default RAW_DATA_DIR
     """
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
     try:
-        gdown.download_folder(
-            url=folder_url,
+        files = gdown.download_folder(
+            url=drive_web_url,
             output=str(output_dir),
             quiet=False,
             use_cookies=False,
         )
-        print(f"Download complete: {output_dir}")
+        
+        print(files)
+        
     except Exception as e:
         print(f"An error occurred: {e}")
         raise
-
+    
     return output_dir
 
-def classify_columns(df, identifiers=None, numerical=None, str=None):
+def classify_columns(df):
     """
     input:
         df
-    function:
-        groups columns names into identifiers, numerical and text lists.
-        also check the match of no of columns input and no of columns output
     return
         id_col_names, num_col_names, text_col_names, bool
-    interpret:
-        classify attrbs to id, num and str by their names only
+    function:
+        classify and group columns names into identifiers, numerical and text types by their name only.
+        It also check the match of no of columns input and no of columns output
     """
-    # import required libs
-    import pandas as pd
 
-    if identifiers is None:
-        identifiers = []
-    if numerical is None:
-        numerical = []
-    if str is None:
-        str = []
+    identifiers = []
+    numerical = []
+    text = []
 
     og_cols_count = len(df.columns)
 
@@ -83,39 +86,46 @@ def classify_columns(df, identifiers=None, numerical=None, str=None):
             if col not in numerical:
                 numerical.append(col)
         else:
-            if col not in str:
-                str.append(col)
-    md_cols_count = sum([len(item) for item in [identifiers, numerical, str]])
-    is_count_match = og_cols_count == md_cols_count
+            if col not in text:
+                text.append(col)
 
-    return identifiers, numerical, str, is_count_match
+    md_cols_count = sum([len(item) for item in [identifiers, numerical, text]])
+    is_count_match = (og_cols_count == md_cols_count)
+
+    return identifiers, numerical, text, is_count_match
 
 
-def initial_inspect_str_attr(df: pd.DataFrame, attr_name: str, value_count=True, diagram=True):
+def initial_inspect_str_attr(df: pd.DataFrame, 
+                             attr_name: str, 
+                             *,
+                             value_count: bool = True, 
+                             diagram: bool = True, 
+                             miss_label: str = "<missing>"):
     """
     inputs: 
         df and str attr name
-    function: 
-        perform value counts and horizontal count plot for given str/categorical attribute
     returns:
         value_count series and count plot
-    interpret:
-        In value count series - the rows cat are no of unique values
-        In count plot - it is for quick visual sense
+    function: 
+        perform value counts: number of unique categories and its frequency of occurences,
+                horizontal count plot: for quick visual sense of frequncies across unique categoreis,
+                for the given str/categorical attribute in given dataframe.
     """
-    # import related libs
-    import pandas as pd
-    import seaborn as sns
 
-    freq_count = df[attr_name].value_counts(dropna=False, sort=True)
-
-    missing_label = "<missing>"
+    missing_label = miss_label
     plot_attr = df[attr_name].where(df[attr_name].notna(), missing_label)
-    order = plot_attr.value_counts(sort=True).index
-    plot = sns.countplot(y=plot_attr, order=order)
-    
-    plot.grid(True, axis="x", linestyle="--", alpha=0.7)
-    plot.set_ylabel(attr_name)
+
+
+    # freq_count = df[attr_name].value_counts(dropna=False, sort=True)
+    freq_count = plot_attr.value_counts(sort=True)
+
+    if diagram:
+        order = freq_count.index
+
+        plot = sns.countplot(y=plot_attr, order=order)
+        plot.grid(True, axis="x", linestyle="--", alpha=0.7)
+        plot.set_ylabel(attr_name)
+        plot.set_xlabel("Count Frequencies")
 
     if value_count and diagram:
         return freq_count, plot
@@ -129,7 +139,6 @@ def initial_inspect_str_attr(df: pd.DataFrame, attr_name: str, value_count=True,
 
 
 if __name__ == "__main__":
-    download_gdrive_folder(folder_url=GDRIVE_LINK, output_dir=RAW_DATA_DIR) # download the og dataset to raw data dir
-    # app()
+    app()
 
 
