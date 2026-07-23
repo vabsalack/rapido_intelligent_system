@@ -1,8 +1,9 @@
 # Data
 # /data/
 
-# rough files
-rough work/
+# workflow files
+reports/workflow_tracker_.md
+
 
 # vscode
 .vscode/
