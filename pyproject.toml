@@ -21,6 +21,7 @@ dependencies = [
     "mkdocs",
     "pip",
     "python-dotenv",
+    "rich>=15.0.0",
     "tqdm",
     "typer",
 ]

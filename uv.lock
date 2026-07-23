@@ -1063,6 +1063,7 @@ dependencies = [
     { name = "mkdocs" },
     { name = "pip" },
     { name = "python-dotenv" },
+    { name = "rich" },
     { name = "tqdm" },
     { name = "typer" },
 ]
@@ -1100,6 +1101,7 @@ requires-dist = [
     { name = "mkdocs" },
     { name = "pip" },
     { name = "python-dotenv" },
+    { name = "rich", specifier = ">=15.0.0" },
     { name = "tqdm" },
     { name = "typer" },
 ]
