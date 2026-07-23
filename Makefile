@@ -4,7 +4,7 @@
 
 PROJECT_NAME = rapido_intelligent_system
 PYTHON_VERSION = 3.14
-PYTHON_INTERPRETER = python
+PYTHON_INTERPRETER = uv run python
 
 #################################################################################
 # COMMANDS                                                                      #
@@ -51,10 +51,6 @@ format:
 	ruff check --fix
 	ruff format
 
-
-
-
-
 ## Set up Python interpreter environment
 .PHONY: create_environment
 create_environment:
@@ -63,19 +59,14 @@ create_environment:
 	@echo ">>> Windows: .\\\\.venv\\\\Scripts\\\\activate"
 	@echo ">>> Unix/macOS: source ./.venv/bin/activate"
 	
-
-
-
 #################################################################################
 # PROJECT RULES                                                                 #
 #################################################################################
 
-
 ## Make dataset
-.PHONY: data
-data: requirements
-	$(PYTHON_INTERPRETER) rapido_intelligent_system/dataset.py
-
+.PHONY: data-download
+data-download: requirements
+	$(PYTHON_INTERPRETER) -m rapido_intelligent_system.dataset download
 
 #################################################################################
 # Self Documenting Commands                                                     #
