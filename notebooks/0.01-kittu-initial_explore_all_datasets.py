@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.23.14"
+__generated_with = "0.23.10"
 app = marimo.App()
 
 
@@ -343,14 +343,14 @@ def _(mo):
 
 
 @app.cell
-def _(customers, customers_num_cols):
-    customers[customers_num_cols]
+def _(customers):
+    customers.describe().round(2)
     return
 
 
 @app.cell
-def _(customers):
-    customers.describe().round(2)
+def _(customers, customers_num_cols):
+    customers[customers_num_cols]
     return
 
 
@@ -457,7 +457,6 @@ def _(drivers):
 @app.cell
 def _(drivers, pd):
     pd.concat([drivers.head(5), drivers.tail(5)], ignore_index=False)
-
     return
 
 
@@ -472,6 +471,12 @@ def _(classify_columns, drivers):
     drivers_id_cols, drivers_num_cols, drivers_str_cols, _is_match  = classify_columns(drivers)
     _is_match
     return drivers_id_cols, drivers_num_cols, drivers_str_cols
+
+
+@app.cell
+def _(drivers_id_cols, drivers_num_cols, drivers_str_cols):
+    drivers_id_cols, drivers_num_cols, drivers_str_cols
+    return
 
 
 @app.cell(hide_code=True)
@@ -607,6 +612,12 @@ def _(classify_columns, loc_demand):
     return loc_demand_id_cols, loc_demand_num_cols, loc_demand_str_cols
 
 
+@app.cell
+def _(loc_demand_id_cols, loc_demand_num_cols, loc_demand_str_cols):
+    loc_demand_id_cols, loc_demand_num_cols, loc_demand_str_cols
+    return
+
+
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
@@ -736,14 +747,12 @@ def _(time_feat):
 @app.cell
 def _(pd, time_feat):
     pd.concat([time_feat.head(5), time_feat.tail(5)], ignore_index=False)
-
     return
 
 
 @app.cell
 def _(time_feat):
     time_feat.sample(n=20, ignore_index=False, random_state=55)
-
     return
 
 
@@ -752,6 +761,12 @@ def _(classify_columns, time_feat):
     time_feat_id_cols, time_feat_num_cols, time_feat_str_cols, _is_match  = classify_columns(time_feat)
     _is_match
     return time_feat_id_cols, time_feat_num_cols, time_feat_str_cols
+
+
+@app.cell
+def _(time_feat_id_cols, time_feat_num_cols, time_feat_str_cols):
+    time_feat_id_cols, time_feat_num_cols, time_feat_str_cols
+    return
 
 
 @app.cell(hide_code=True)
