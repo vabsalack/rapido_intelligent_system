@@ -90,9 +90,9 @@ def classify_columns(df):
                 text.append(col)
 
     md_cols_count = sum([len(item) for item in [identifiers, numerical, text]])
-    is_count_match = (og_cols_count == md_cols_count)
+    columsn_count_equal = "classified columns count = total columns count" if (og_cols_count == md_cols_count) else "classified columns count != total columns count"
 
-    return identifiers, numerical, text, is_count_match
+    return identifiers, numerical, text, columsn_count_equal
 
 
 def initial_inspect_str_attr(df: pd.DataFrame, 
@@ -135,7 +135,52 @@ def initial_inspect_str_attr(df: pd.DataFrame,
 
     if diagram:
         return plot
-    
+
+def validate_identifier_columns(df, id_columns):
+
+    infos = ["id_columns is empty"]
+    _flag = True
+    for col in id_columns:
+        if _flag:
+            infos.pop()
+            _flag = False
+            
+        # check if it exists
+        if col not in df.columns:
+            infos.append(f"{col}: not found in given dataframe")
+            continue
+        
+        non_null_values = df[col].dropna()
+
+        # check if all vals are null
+        if non_null_values.empty:
+            infos.append(f"{col}: all values are null")
+            continue
+
+        # check how many vals are null
+        diff = len(df[col]) - len(non_null_values)
+        if diff:
+            infos.append(f"{col}: has {diff} null values")
+        else:
+            infos.append(f"{col}: has no null values")
+
+        # check all non vals are unique
+        if non_null_values.nunique() != len(non_null_values):
+            infos.append(f"{col}: values are not unique")
+        else:
+            infos.append(f"{col}: all values are unique")
+
+    # is_all_ids_valid = len(infos) == 0
+
+    # if is_all_ids_valid:
+    #     print("All given id columns are valid, does not contain null, all values are unquie in it")
+    # else:
+    #     print("Below id columsn has the errors")
+    #     for info in infos:
+    #         print(info)
+
+    for info in infos:
+        print(info)
 
 
 if __name__ == "__main__":
