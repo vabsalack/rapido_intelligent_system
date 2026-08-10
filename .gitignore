@@ -4,6 +4,8 @@
 # workflow and artifacts folder
 /workflow_tracker
 
+# untrack __marimo__/session
+notebooks/__marimo__/session
 
 # vscode
 .vscode/
