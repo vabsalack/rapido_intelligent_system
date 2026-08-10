@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.23.10"
+__generated_with = "0.23.16"
 app = marimo.App(auto_download=["ipynb"])
 
 
@@ -590,6 +590,12 @@ def _(location_demand_path, pd):
 @app.cell
 def _(loc_demand):
     loc_demand.info()
+    return
+
+
+@app.cell
+def _(loc_demand):
+    loc_demand
     return
 
 
