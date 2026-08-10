@@ -59,6 +59,7 @@ def _(booking_df):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
+ 
     """)
     return
 
