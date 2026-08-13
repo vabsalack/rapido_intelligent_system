@@ -156,6 +156,19 @@ def _(bookings, bookings_num_cols):
 
 
 @app.cell
+def _(bookings, sns):
+    # Count Plot (most used in EDA)
+    sns.countplot(data=bookings, x='is_weekend', hue="booking_status")
+
+    # With target hue (powerful)
+    # sns.countplot(data=df, x='department', hue='target')
+
+    # Horizontal for many categories
+    # sns.countplot(data=df, y='job_title')
+    return
+
+
+@app.cell
 def _(bookings):
     bookings.describe().round(2)
     return
