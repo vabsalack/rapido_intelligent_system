@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.23.16"
+__generated_with = "0.24.0"
 app = marimo.App(auto_download=["ipynb"])
 
 
@@ -12,7 +12,7 @@ def _():
     import matplotlib as mpl
     import matplotlib.pyplot as plt
 
-    from rapido_intelligent_system.dataset import (classify_columns, 
+    from rapido_intelligent_system.dataset_mnb import (classify_columns, 
                                                    initial_inspect_str_attr, 
                                                    validate_identifier_columns)
 
@@ -40,7 +40,7 @@ def _(mo, mpl, pd, sns):
 
 @app.cell
 def _():
-    from rapido_intelligent_system.config import RAW_DATA_DIR
+    from rapido_intelligent_system.config_mnb import RAW_DATA_DIR
 
     return (RAW_DATA_DIR,)
 

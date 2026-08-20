@@ -20,7 +20,9 @@ dependencies = [
     "loguru",
     "marimo>=0.23.10",
     "mkdocs",
+    "nbformat>=5.11.1",
     "pip",
+    "pydantic-ai>=2.32.1",
     "python-dotenv",
     "rich>=15.0.0",
     "tqdm",
@@ -41,6 +43,9 @@ extend-select = ["I"]  # Add import sorting
 known-first-party = ["rapido_intelligent_system"]
 force-sort-within-sections = true
 
+[tool.marimo.runtime]
+watcher_on_save = "autorun"
+
 
 [tool.commitizen]
 name = "cz_conventional_commits"
@@ -57,6 +62,7 @@ dev = [
     "lightgbm>=4.6.0",
     "matplotlib>=3.11.0",
     "numpy>=2.4.6",
+    "optuna>=4.9.0",
     "pandas>=3.0.3",
     "plotly>=6.8.0",
     "ruff>=0.15.18",
