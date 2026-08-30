@@ -61,7 +61,6 @@ dev = [
     "catboost>=1.2.10",
     "commitizen>=4.16.3",
     "lightgbm>=4.6.0",
-    "matplotlib>=3.11.0",
     "numpy>=2.4.6",
     "polars>=1.44.1",
     "ruff>=0.15.18",
