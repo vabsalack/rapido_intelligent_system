@@ -5,6 +5,18 @@ app = marimo.App(width="medium")
 
 
 @app.cell
+def _():
+    import marimo as mo
+    from pathlib import Path
+    import typer
+    from loguru import logger
+    from tqdm import tqdm
+    from rapido_intelligent_system.config_mnb import FIGURES_DIR, PROCESSED_DATA_DIR
+
+    return FIGURES_DIR, PROCESSED_DATA_DIR, Path, logger, mo, tqdm, typer
+
+
+@app.cell
 def _(mo):
     is_script_mode = mo.app_meta().mode == "script"
     return (is_script_mode,)
@@ -36,18 +48,6 @@ def _(
     if is_script_mode:
         typer_app()
     return
-
-
-@app.cell
-def _():
-    import marimo as mo
-    from pathlib import Path
-    import typer
-    from loguru import logger
-    from tqdm import tqdm
-    from rapido_intelligent_system.config_mnb import FIGURES_DIR, PROCESSED_DATA_DIR
-
-    return FIGURES_DIR, PROCESSED_DATA_DIR, Path, logger, mo, tqdm, typer
 
 
 if __name__ == "__main__":
