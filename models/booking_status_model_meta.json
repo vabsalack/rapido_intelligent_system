@@ -1,0 +1,41 @@
+{
+  "project": "rapido_intelligent_system",
+  "model": "LogisticRegression (softmax)",
+  "task": "multi-class classification",
+  "target": "booking_status",
+  "classes": [
+    "Cancelled",
+    "Completed",
+    "Incomplete"
+  ],
+  "features": [
+    "ride_distance_km",
+    "estimated_ride_time_min",
+    "base_fare",
+    "surge_multiplier",
+    "traffic_level",
+    "weather_condition",
+    "avg_wait_time_min",
+    "avg_surge_multiplier",
+    "demand_level",
+    "season",
+    "vehicle_type"
+  ],
+  "engineered_features": [
+    "fare_per_km",
+    "surge_impact",
+    "mins_per_km",
+    "wait_share_of_ride"
+  ],
+  "best_params": {
+    "C": "0.16949768237884735",
+    "class_weight": "None",
+    "max_iter": "2000"
+  },
+  "cv_best_f1_weighted": 0.6115,
+  "val_f1_weighted": 0.615,
+  "val_f1_macro": 0.3614,
+  "val_accuracy": 0.6778,
+  "search_n_iter": 15,
+  "search_cv": 3
+}

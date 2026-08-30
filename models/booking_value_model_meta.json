@@ -1,0 +1,38 @@
+{
+  "project": "rapido_intelligent_system",
+  "model": "HistGradientBoosting",
+  "task": "regression",
+  "target": "booking_value",
+  "features": [
+    "ride_distance_km",
+    "estimated_ride_time_min",
+    "base_fare",
+    "surge_multiplier",
+    "pickup_location",
+    "traffic_level",
+    "avg_wait_time_min",
+    "avg_surge_multiplier",
+    "vehicle_type",
+    "weather_condition",
+    "hour_of_day"
+  ],
+  "engineered_features": [
+    "fare_per_km",
+    "mins_per_km",
+    "wait_share_of_ride"
+  ],
+  "best_params": {
+    "l2_regularization": "1.0461232326411385",
+    "learning_rate": "0.048440014400661126",
+    "max_depth": "None",
+    "max_iter": "400",
+    "max_leaf_nodes": "31"
+  },
+  "cv_best_r2": 0.9966,
+  "val_rmse": 11.676,
+  "val_mae": 8.533,
+  "val_r2": 0.9969,
+  "val_mape": 0.0263,
+  "search_n_iter": 15,
+  "search_cv": 3
+}

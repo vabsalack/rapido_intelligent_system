@@ -1,0 +1,40 @@
+{
+  "project": "rapido_intelligent_system",
+  "model": "SGDClassifier (softmax)",
+  "task": "binary classification",
+  "target": "customer_cancel_flag",
+  "classes": [
+    0,
+    1
+  ],
+  "features": [
+    "customer_gender",
+    "customer_age",
+    "customer_city",
+    "customer_signup_days_ago",
+    "total_bookings",
+    "completed_rides",
+    "incomplete_rides",
+    "avg_customer_rating",
+    "preferred_vehicle_type"
+  ],
+  "engineered_features": [
+    "completion_rate",
+    "incomplete_rate",
+    "bookings_per_year"
+  ],
+  "best_params": {
+    "alpha": "1.536960311060883e-05",
+    "l1_ratio": "0.9737555188414592",
+    "learning_rate": "adaptive",
+    "loss": "modified_huber",
+    "max_iter": "3000"
+  },
+  "cv_best_f1": 1.0,
+  "val_f1": 1.0,
+  "val_precision": 1.0,
+  "val_recall": 1.0,
+  "val_accuracy": 1.0,
+  "search_n_iter": 15,
+  "search_cv": 3
+}

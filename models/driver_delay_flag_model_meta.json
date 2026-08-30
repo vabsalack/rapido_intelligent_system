@@ -1,0 +1,41 @@
+{
+  "project": "rapido_intelligent_system",
+  "model": "HistGradientBoosting",
+  "task": "binary classification",
+  "target": "driver_delay_flag",
+  "classes": [
+    0,
+    1
+  ],
+  "features": [
+    "driver_age",
+    "driver_city",
+    "vehicle_type",
+    "driver_experience_years",
+    "total_assigned_rides",
+    "accepted_rides",
+    "incomplete_rides",
+    "acceptance_rate",
+    "avg_driver_rating",
+    "avg_pickup_delay_min"
+  ],
+  "engineered_features": [
+    "incomplete_share",
+    "delay_x_incomplete",
+    "experience_share"
+  ],
+  "best_params": {
+    "l2_regularization": "0.0004185822729546974",
+    "learning_rate": "0.22648248189516848",
+    "max_depth": "8",
+    "max_iter": "400",
+    "max_leaf_nodes": "15"
+  },
+  "cv_best_f1": 0.7809,
+  "val_f1": 0.8792,
+  "val_precision": 0.8922,
+  "val_recall": 0.8667,
+  "val_accuracy": 0.9688,
+  "search_n_iter": 15,
+  "search_cv": 3
+}
