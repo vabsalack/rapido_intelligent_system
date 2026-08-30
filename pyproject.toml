@@ -16,6 +16,7 @@ classifiers = [
     
 ]
 dependencies = [
+    "fastapi[standard]>=0.141.1",
     "gdown>=6.1.0",
     "loguru",
     "marimo>=0.23.10",
@@ -27,6 +28,7 @@ dependencies = [
     "rich>=15.0.0",
     "tqdm",
     "typer",
+    "uvicorn>=0.52.4",
 ]
 requires-python = "~=3.14.0"
 
@@ -42,6 +44,9 @@ extend-select = ["I"]  # Add import sorting
 [tool.ruff.lint.isort]
 known-first-party = ["rapido_intelligent_system"]
 force-sort-within-sections = true
+
+[tool.fastapi]
+entrypoint = "rapido_intelligent_system.api.app:app"
 
 [tool.marimo.runtime]
 watcher_on_save = "autorun"
